@@ -17,8 +17,8 @@ class SongCreate extends Component {
       .mutate({
         variables: {
           title: this.state.title
-        },
-        refetchQueries: [{ query: fetchSongQuery }]
+        }
+        // refetchQueries: [{ query: fetchSongQuery }]
       })
       .then(() => hashHistory.push("/"));
   }

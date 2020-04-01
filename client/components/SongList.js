@@ -6,16 +6,18 @@ import fetchSongQuery from "../queries/fetchSongs";
 
 class SongList extends Component {
   onSongDelete(id) {
-    this.props.mutate({
-      variables: { id }
-    });
+    this.props
+      .mutate({
+        variables: { id }
+      })
+      .then(() => this.props.data.refetch());
   }
 
   renderSongs() {
     return this.props.data.songs.map(song => {
       return (
         <li className="collection-item" key={song.id}>
-          {song.title}
+          <Link to={`/songs/${song.id}`}>{song.title}</Link>
           <i
             className="material-icons right"
             onClick={() => this.onSongDelete(song.id)}
@@ -32,7 +34,7 @@ class SongList extends Component {
     return (
       <div>
         <ul className="collection">{this.renderSongs()}</ul>
-        <Link to="/songs/new" className="btn-floating btn-large red right">
+        <Link to="/songs/new" className="btn-floating btn-large right">
           <i className="material-icons">add</i>
         </Link>
       </div>
